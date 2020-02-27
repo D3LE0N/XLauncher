@@ -84,7 +84,7 @@ public class Launcher {
         if (launcherListener == null)
             return false;
 
-        if (activity == null || fragment == null) {
+        if (activity == null && fragment == null) {
 
             launcherListener.onError(new LauncherException(1, "The activity or Fragment is null"));
             return false;
