@@ -6,6 +6,7 @@ import android.text.TextUtils;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
 import com.google.gson.Gson;
 import com.ssasa.core.pojo.LauncherException;
@@ -21,12 +22,20 @@ public class Launcher {
     private Activity activity;
     private static final String ACTION = "com.codevelopers.lectordpisat.READERACTION";
     private static final String KEY = "key";
+    private Fragment fragment;
 
     public Launcher(@NonNull Activity activity, @NonNull String secretKey, @NonNull LauncherListener listener) {
 
         this.secretKey = secretKey;
         this.launcherListener = listener;
         this.activity = activity;
+    }
+
+    public Launcher(@NonNull Fragment fragment, @NonNull String secretKey, @NonNull LauncherListener listener) {
+
+        this.secretKey = secretKey;
+        this.launcherListener = listener;
+        this.fragment = fragment;
     }
 
     public void launch() {
@@ -38,25 +47,30 @@ public class Launcher {
         Intent intent = new Intent(ACTION);
         intent.putExtra(KEY, secretKey);
 
-        if (intent.resolveActivity(activity.getPackageManager()) != null)
-            activity.startActivityForResult(intent, REQUEST_CODE);
+
+        if (intent.resolveActivity((activity == null ? fragment.getActivity() : activity).getPackageManager()) != null)
+
+            if (activity != null) {
+                activity.startActivityForResult(intent, REQUEST_CODE);
+            } else
+                fragment.startActivityForResult(intent, REQUEST_CODE);
         else
             launcherListener.onError(new LauncherException(3, "No has Launcher app"));
     }
 
 
-    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data ){
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
 
         if (requestCode != REQUEST_CODE)
             return;
 
-        if (resultCode != RESULT_OK){
+        if (resultCode != RESULT_OK) {
             launcherListener.onError(new LauncherException(4, "The user cancel capture or Secret key is invalid"));
             return;
         }
 
         String json;
-        if (data == null || (json = data.getStringExtra(KEY)) == null){
+        if (data == null || (json = data.getStringExtra(KEY)) == null) {
 
             launcherListener.onError(new LauncherException(5, "Not capturing data"));
             return;
@@ -70,9 +84,9 @@ public class Launcher {
         if (launcherListener == null)
             return false;
 
-        if (activity == null) {
+        if (activity == null || fragment == null) {
 
-            launcherListener.onError(new LauncherException(1, "The activity is null"));
+            launcherListener.onError(new LauncherException(1, "The activity or Fragment is null"));
             return false;
         }
 
