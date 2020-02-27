@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        launcher = new Launcher(this, "xxxxxxxxxxxxxxxxx", new LauncherListener() {
+        launcher = new Launcher(this, "735458bb97XXXXXX70e7b4afb24", new LauncherListener() {
 
             @Override
             public void onSuccess(Persona persona) {
