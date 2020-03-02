@@ -1,15 +1,9 @@
 package com.ssasa.core.pojo;
 
-import androidx.annotation.NonNull;
-
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import java.util.Locale;
-
 public class Persona {
-    @Expose
-    private String J, N, O, P, Q, R, S, T, U, V; //datos complementarios
 
     @SerializedName("gentilicio")
     private String gentilicio;      //H
@@ -93,6 +87,8 @@ public class Persona {
     private String direccion;
     @SerializedName("foto")
     private String foto;
+    @SerializedName("versionDPI")
+    private int versionDPI;
     @Expose
     String uriFoto;
 
@@ -144,6 +140,10 @@ public class Persona {
         mrz2 = "";       //D
         serial = "";     //E
         direccion = "";
+    }
+
+    public int getVersionDPI() {
+        return versionDPI;
     }
 
     public String getDireccion() {
@@ -200,86 +200,6 @@ public class Persona {
 
     public void setOtrosNombres(String otrosNombres) {
         this.otrosNombres = otrosNombres;
-    }
-
-    public String getJ() {
-        return J;
-    }
-
-    public void setJ(String j) {
-        J = j;
-    }
-
-    public String getN() {
-        return N;
-    }
-
-    public void setN(String n) {
-        N = n;
-    }
-
-    public String getO() {
-        return O;
-    }
-
-    public void setO(String o) {
-        O = o;
-    }
-
-    public String getP() {
-        return P;
-    }
-
-    public void setP(String p) {
-        P = p;
-    }
-
-    public String getQ() {
-        return Q;
-    }
-
-    public void setQ(String q) {
-        Q = q;
-    }
-
-    public String getR() {
-        return R;
-    }
-
-    public void setR(String r) {
-        R = r;
-    }
-
-    public String getS() {
-        return S;
-    }
-
-    public void setS(String s) {
-        S = s;
-    }
-
-    public String getT() {
-        return T;
-    }
-
-    public void setT(String t) {
-        T = t;
-    }
-
-    public String getU() {
-        return U;
-    }
-
-    public void setU(String u) {
-        U = u;
-    }
-
-    public String getV() {
-        return V;
-    }
-
-    public void setV(String v) {
-        V = v;
     }
 
     public String getGentilicio() {
@@ -538,10 +458,7 @@ public class Persona {
         this.serial = serial;
     }
 
-
-    @NonNull
-    @Override
-    public String toString() {
-        return String.format(Locale.getDefault(), "Nombre %s apellido %s ", primerNombre, primerApellido);
+    public void setVersionDPI(int versionDPI) {
+        this.versionDPI = versionDPI;
     }
 }
