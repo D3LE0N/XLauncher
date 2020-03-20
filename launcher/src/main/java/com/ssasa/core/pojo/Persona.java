@@ -3,6 +3,8 @@ package com.ssasa.core.pojo;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
+
 public class Persona {
 
     @SerializedName("gentilicio")
@@ -13,6 +15,9 @@ public class Persona {
     private String etnia;           //L
     @Expose
     private String xx;              //M
+
+    @SerializedName("huellas")
+    private ArrayList<Huella> huellas; //F
 
     @SerializedName("cui")
     private String cui;             //a
@@ -77,8 +82,8 @@ public class Persona {
     private String departamentoCedula;  //A
     @SerializedName("oficialActivo")
     private String oficialActivo;       //B
-    @SerializedName("fotografia")
-    private byte[] fotografia;  //C
+    //@Expose
+    //private byte[] fotografia;  //C
     @SerializedName("mrz2")
     private String mrz2;
     @SerializedName("serial")
@@ -434,13 +439,13 @@ public class Persona {
         this.oficialActivo = oficialActivo;
     }
 
-    public byte[] getFotografia() {
-        return fotografia;
-    }
-
-    public void setFotografia(byte[] fotografia) {
-        this.fotografia = fotografia;
-    }
+//    public byte[] getFotografia() {
+//        return fotografia;
+//    }
+//
+//    public void setFotografia(byte[] fotografia) {
+//        this.fotografia = fotografia;
+//    }
 
     public String getMrz2() {
         return mrz2;
@@ -460,5 +465,13 @@ public class Persona {
 
     public void setVersionDPI(int versionDPI) {
         this.versionDPI = versionDPI;
+    }
+
+    public ArrayList<Huella> getHuellas() {
+        return huellas;
+    }
+
+    public void setHuellas(ArrayList<Huella> huellas) {
+        this.huellas = huellas;
     }
 }
