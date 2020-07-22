@@ -48,13 +48,13 @@ public class Launcher {
         intent.putExtra(KEY, secretKey);
 
 
-        if (intent.resolveActivity((activity == null ? fragment.getActivity() : activity).getPackageManager()) != null)
+        if (intent.resolveActivity((activity == null ? fragment.getActivity() : activity).getPackageManager()) != null){
 
             if (activity != null) {
                 activity.startActivityForResult(intent, REQUEST_CODE);
             } else
                 fragment.startActivityForResult(intent, REQUEST_CODE);
-        else
+        }else
             launcherListener.onError(new LauncherException(3, "No has Launcher app"));
     }
 
